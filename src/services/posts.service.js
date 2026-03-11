@@ -6,21 +6,34 @@ const createPost = async (postData)=>{
     return newData
 }
 const getPost = async(req)=>{
-    const limit = req.query.limit;
-    const page = req.query.page;
-    const data = await Post.find({});
-    if(limit && page){
-        const start = (page-1)*limit;
-        const end = page*limit;
-        const paginatedData = data.slice(start,end);
-        return paginatedData;
+    const {author , limit=10 , page=1 , sortBy} = req.query;
+    const filter = {};
+    if(author){
+    filter.author = author;
     }
+    const limitBy = Number(limit);
+    const pageNum = Number(page);
+    const skipvalue = (pageNum-1)*limitBy;
+    const sortByOption = {};
+    if(sortBy){
+        const [field , order] = sortBy.split(':');
+        sortByOption[field] = order ===des?-1:1;
+    }else{
+        sortByOption.createdAt = -1;
+    }
+    
+    
+    const data = await Post.find(filter)
+    .sort(sortByOption)
+    .skip(skipvalue)
+    .limit(limitBy)
+    .populate('author' , 'username');
     return data
     
 }
 
 const getById = async(postId)=>{
-    const data = await Post.findById(postId);
+    const data = await Post.findById(postId).populate('author' , 'username');
     return data
 }
 

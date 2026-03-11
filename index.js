@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const postRoute = require('./src/routes/posts.route')
+const userRoute = require('./src/routes/users.route')
+const ER = require('./src/middlewares/errorHandler')
 
 //mongodb connection
 const connect = async ()=>{
@@ -18,7 +20,9 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/v1/posts' , postRoute);
+app.use('/api/v1/users' , userRoute);
 
+app.use(ER);
 
 
 
