@@ -6,6 +6,7 @@ const createPost = async (postData)=>{
     return newData
 }
 const getPost = async(req)=>{
+   
     const {author , limit=10 , page=1 , sortBy} = req.query;
     const filter = {};
     if(author){
