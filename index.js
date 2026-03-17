@@ -1,12 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const postRoute = require('./src/routes/posts.route')
 const userRoute = require('./src/routes/users.route')
 const ER = require('./src/middlewares/errorHandler')
 const connect = require('./src/config/db')
 
-connect();
+connect.connect();
 
 const app = express();
 app.use(express.json());
