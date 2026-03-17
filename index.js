@@ -4,15 +4,7 @@ const mongoose = require('mongoose');
 const postRoute = require('./src/routes/posts.route')
 const userRoute = require('./src/routes/users.route')
 const ER = require('./src/middlewares/errorHandler')
-
-//mongodb connection
-const connect = async ()=>{
-    try{
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('connected to mongoDB')}catch(error){
-        console.log(error)
-    }
-}
+const connect = require('./src/config/db')
 
 connect();
 
@@ -30,6 +22,6 @@ app.use(ER);
 
 
 
-app.listen(4000,()=>{
+app.listen(3000,()=>{
     console.log('server on http://localhost:4000')
 })
