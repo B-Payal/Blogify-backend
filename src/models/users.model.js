@@ -2,16 +2,10 @@ const mongoose  = require("mongoose")
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-    firstName:{
+    username:{
         type:String,
         required:true , 
         trim:true
-    },
-    lastName:{
-         type:String,
-        required:true , 
-        trim:true
-
     },
     email:{
         type:String,
@@ -37,9 +31,9 @@ userSchema.pre('save' , async function(next){
     }
 })
 
-userSchema.virtual('fullName').get(function(){
-    return `${this.lastName} ${this.firstName}`
-})
+// userSchema.virtual('fullName').get(function(){
+//     return `${this.lastName} ${this.firstName}`
+// })
 
 const User = mongoose.model('User' , userSchema)
 
