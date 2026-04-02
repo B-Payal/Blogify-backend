@@ -43,6 +43,19 @@ const registerUser = async (req,res , next)=>{
  }
 }
 
+const logoutUser = (req, res) => {
+  // Clear the 'accessToken' cookie
+  res.clearCookie('accessToken', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production'
+  });
+
+  res.status(200).json({
+    success: true,
+    message: 'Logged out successfully'
+  });
+};
+
 
 const practiceTokenGeneration = (req,res)=>{
     const mockUser = {
