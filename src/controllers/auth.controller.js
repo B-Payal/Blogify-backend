@@ -56,7 +56,6 @@ const logoutUser = (req, res) => {
   });
 };
 
-
 const practiceTokenGeneration = (req,res)=>{
     const mockUser = {
     _id: '654a5b8f1c3d4e5f6a7b8c9d',
@@ -83,4 +82,4 @@ const practiceTokenGeneration = (req,res)=>{
   })
 }
 
-module.exports={practiceTokenGeneration , registerUser}
+module.exports={practiceTokenGeneration , registerUser , logoutUser}
